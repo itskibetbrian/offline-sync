@@ -1,0 +1,11 @@
+{
+    "task": {
+        "path": "."
+    },
+    "trial_name": "offline-sync__bmTNipy",
+    "trials_dir": "jobs/2026-09-21__02-59-26",
+    "agent": {
+        "name": "nop"
+    },
+    "job_id": "8418a4f5-1b8c-4ab8-9c6f-907bd1f65ce2"
+}

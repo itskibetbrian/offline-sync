@@ -1,0 +1,174 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3.13
+cachedir: .pytest_cache
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 23 items
+
+test_verifier.py::test_artifact_dist_exists FAILED                       [  4%]
+test_verifier.py::test_artifact_bundle_references_app FAILED             [  8%]
+test_verifier.py::test_artifact_src_present PASSED                       [ 13%]
+test_verifier.py::test_canonical_projection_sorts PASSED                 [ 17%]
+test_verifier.py::test_duplicate_ack_idempotent PASSED                   [ 21%]
+test_verifier.py::test_out_of_order_ack_replays_newer PASSED             [ 26%]
+test_verifier.py::test_stale_ack_cannot_overwrite_newer_pending PASSED   [ 30%]
+test_verifier.py::test_stale_creates_exact_sorted_conflicts PASSED       [ 34%]
+test_verifier.py::test_remote_different_fields_merge_without_conflict PASSED [ 39%]
+test_verifier.py::test_failure_leaves_pending_and_sets_error PASSED      [ 43%]
+test_verifier.py::test_status_precedence PASSED                          [ 47%]
+test_verifier.py::test_resolve_creates_new_mutation_and_clears_one PASSED [ 52%]
+test_verifier.py::test_unrelated_edit_does_not_clear_conflict PASSED     [ 56%]
+test_verifier.py::test_reload_restores_projection PASSED                 [ 60%]
+test_verifier.py::test_scenario_out_of_order_with_reload PASSED          [ 65%]
+test_verifier.py::test_app_persists_server_snapshot FAILED               [ 69%]
+test_verifier.py::test_app_create_never_clears_conflicts FAILED          [ 73%]
+test_verifier.py::test_app_ack_idempotent_and_replays_newer FAILED       [ 78%]
+test_verifier.py::test_app_stale_merges_and_keeps_pending FAILED         [ 82%]
+test_verifier.py::test_app_failure_leaves_pending FAILED                 [ 86%]
+test_verifier.py::test_app_status_precedence PASSED                      [ 91%]
+test_verifier.py::test_app_hooks FAILED                                  [ 95%]
+test_verifier.py::test_app_testids FAILED                                [100%]
+
+=================================== FAILURES ===================================
+__________________________ test_artifact_dist_exists ___________________________
+
+    def test_artifact_dist_exists():
+>       assert (DIST / "index.html").exists(), "missing /workspace/dist/index.html; run npm run build in /workspace"
+E       AssertionError: missing /workspace/dist/index.html; run npm run build in /workspace
+E       assert False
+E        +  where False = exists()
+E        +    where exists = (PosixPath('/workspace/dist') / 'index.html').exists
+
+test_verifier.py:25: AssertionError
+_____________________ test_artifact_bundle_references_app ______________________
+
+    def test_artifact_bundle_references_app():
+>       html = _read(DIST / "index.html")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_verifier.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_verifier.py:13: in _read
+    return p.read_text(encoding="utf-8")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.13/pathlib/_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.13/pathlib/_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/workspace/dist/index.html'), mode = 'r', buffering = -1
+encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/workspace/dist/index.html'
+
+/usr/local/lib/python3.13/pathlib/_local.py:537: FileNotFoundError
+______________________ test_app_persists_server_snapshot _______________________
+
+    def test_app_persists_server_snapshot():
+>       assert "server" in _read(SRC / "storage" / "persistence.ts")
+E       assert 'server' in 'import type { Conflict, LocalMutation, TradeRecord } from "../types";\n\nconst KEY = "afterquery-offline-sync-v1";\n\ntype Persisted = {\n  records: Record<string, TradeRecord>;\n  pending: LocalMutation[];\n  conflicts: Conflict[];\n  nextId: number;\n};\n\nconst defaults = (): Persisted => ({\n  records: {\n    r1: {\n      id: "r1",\n      title: "Steel shipment",\n      notes: "40 tonnes",\n      status: "draft",\n      version: 1\n    }\n  },\n  pending: [],\n  conflicts: [],\n  nextId: 1\n});\n\nexport function load(): Persisted {\n  try {\n    const raw = localStorage.getItem(KEY);\n    if (!raw) return defaults();\n    return JSON.parse(raw) as Persisted;\n  } catch {\n    return defaults();\n  }\n}\n\nexport function save(state: Persisted) {\n  localStorage.setItem(KEY, JSON.stringify(state));\n}\n\nexport type { Persisted };\n'
+E        +  where 'import type { Conflict, LocalMutation, TradeRecord } from "../types";\n\nconst KEY = "afterquery-offline-sync-v1";\n\ntype Persisted = {\n  records: Record<string, TradeRecord>;\n  pending: LocalMutation[];\n  conflicts: Conflict[];\n  nextId: number;\n};\n\nconst defaults = (): Persisted => ({\n  records: {\n    r1: {\n      id: "r1",\n      title: "Steel shipment",\n      notes: "40 tonnes",\n      status: "draft",\n      version: 1\n    }\n  },\n  pending: [],\n  conflicts: [],\n  nextId: 1\n});\n\nexport function load(): Persisted {\n  try {\n    const raw = localStorage.getItem(KEY);\n    if (!raw) return defaults();\n    return JSON.parse(raw) as Persisted;\n  } catch {\n    return defaults();\n  }\n}\n\nexport function save(state: Persisted) {\n  localStorage.setItem(KEY, JSON.stringify(state));\n}\n\nexport type { Persisted };\n' = _read(((PosixPath('/workspace/src') / 'storage') / 'persistence.ts'))
+
+test_verifier.py:206: AssertionError
+____________________ test_app_create_never_clears_conflicts ____________________
+
+    def test_app_create_never_clears_conflicts():
+        body = _method_slice(_engine(), "create(recordId")
+>       assert "conflict" not in body.lower(), "create() must not touch conflicts (rule 8)"
+E       AssertionError: create() must not touch conflicts (rule 8)
+E       assert 'conflict' not in 'create(reco...his.flush();'
+E         
+E         'conflict' is contained here:
+E           create(recordid: string, fields: partial<traderecord>) {
+E               const record = this.state.records[recordid];
+E               if (!record) throw new error("unknown record");
+E           
+E               const clean: localmutation["fields"] = {};...
+E         
+E         ...Full output truncated (34 lines hidden), use '-vv' to show
+
+test_verifier.py:211: AssertionError
+__________________ test_app_ack_idempotent_and_replays_newer ___________________
+
+    def test_app_ack_idempotent_and_replays_newer():
+        body = _method_slice(_engine(), "private ack(")
+        assert "if (index < 0) return" in body
+>       assert "remaining" in body and "newer" in body
+E       AssertionError: assert ('remaining' in 'private ack(id: number, serverRecord: TradeRecord) {\n    const index = this.state.pending.findIndex((op) => op.id === id);\n    if (index < 0) return;\n\n    const current = this.state.records[serverRecord.id];\n    if (!current) return;\n\n    const op = this.state.pending[index];\n\n    // Apply the authoritative server result, then replay newer local operations.\n    let next = { ...serverRecord };\n    for (const newer of this.state.pending.filter((x) => x.id > op.id)) {\n      if (newer.recordId === next.id) {\n        next = { ...next, ...newer.fields };\n      }\n    }\n\n    this.state.records[serverRecord.id] = next;\n    this.state.pending = this.state.pending.filter((x) => x.id !== id);\n\n    if (this.activeRequest === id) this.activeRequest = null;\n    this.state.syncing = false;\n    this.persist();\n    this.emit();\n    this.flush();')
+
+test_verifier.py:217: AssertionError
+___________________ test_app_stale_merges_and_keeps_pending ____________________
+
+    def test_app_stale_merges_and_keeps_pending():
+        body = _method_slice(_engine(), "private stale(")
+>       assert "reconcile" in body
+E       AssertionError: assert 'reconcile' in 'private stale(id: number, remote: TradeRecord) {\n    const op = this.state.pending.find((x) => x.id === id);\n    if (!op) return;\n\n    const local = this.state.records[remote.id];\n    if (!local) return;\n\n    const conflicts = [...this.state.conflicts];\n\n    for (const field of EDITABLE) {\n      if (op.fields[field] === undefined) continue;\n\n      const localValue = String(op.fields[field]);\n      const remoteValue = String(remote[field]);\n\n      if (localValue !== remoteValue) {\n        if (!conflicts.some((c) =>\n          c.recordId === remote.id && c.field === field\n        )) {\n          conflicts.push({\n            recordId: remote.id,\n            field,\n            localValue,\n            remoteValue\n          });\n        }\n      }\n    }\n\n    this.state.records[remote.id] = {\n      ...remote,\n      ...local\n    };\n    this.state.conflicts = conflicts;\n    this.state.syncing = false;\n    if (this.activeRequest === id) this.activeRequest = null;\n    this.persist();\n    this.emit();'
+
+test_verifier.py:222: AssertionError
+_______________________ test_app_failure_leaves_pending ________________________
+
+    def test_app_failure_leaves_pending():
+>       body = _method_slice(_engine(), "private failure(")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_verifier.py:227: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+text = 'import { adapter } from "../adapter/serverAdapter";\nimport type { LocalMutation, TradeRecord } from "../types";\nimp... = this.state.conflicts;\n    save(p);\n  }\n\n  private emit() {\n    this.listeners.forEach((fn) => fn());\n  }\n}\n'
+marker = 'private failure('
+
+    def _method_slice(text: str, marker: str) -> str:
+>       start = text.index(marker)
+                ^^^^^^^^^^^^^^^^^^
+E       ValueError: substring not found
+
+test_verifier.py:17: ValueError
+________________________________ test_app_hooks ________________________________
+
+    def test_app_hooks():
+        text = _read(SRC / "App.tsx")
+        for hook in ("__AFTERQUERY_STATE__", "__AFTERQUERY_ADAPTER__", "__AFTERQUERY_READY__", "__AFTERQUERY_RESET__"):
+>           assert hook in text, f"missing {hook}"
+E           AssertionError: missing __AFTERQUERY_ADAPTER__
+E           assert '__AFTERQUERY_ADAPTER__' in 'import { useEffect, useMemo, useState } from "react";\nimport { adapter } from "./adapter/serverAdapter";\nimport { ConflictPanel } from "./components/ConflictPanel";\nimport { RecordEditor } from "./components/RecordEditor";\nimport { SyncStatusView } from "./components/SyncStatus";\nimport { SyncEngine } from "./sync/syncEngine";\n\nconst engine = new SyncEngine();\n\nexport default function App() {\n  const [, redraw] = useState(0);\n\n  useEffect(() => engine.subscribe(() => redraw((x) => x + 1)), []);\n\n  const state = engine.getState();\n  const record = useMemo(\n    () => Object.values(state.records)[0],\n    [state.records]\n  );\n\n  (window as any).__AFTERQUERY_STATE__ = () => engine.getState();\n\n  return (\n    <main style={{ maxWidth: 720, margin: "40px auto", padding: 20 }}>\n      <h1>Offline Sync</h1>\n\n      <button\n        data-testid="toggle-connectivity"\n        onClick={() => adapter.setOnline(!adapter.isOnline())}\n      >\n        Toggle connection\n      </button>\n\n      {record && (\n        <RecordEditor\n          record={record}\n          onSave={(fields) => engine.create(record.id, fields)}\n        />\n      )}\n\n      <SyncStatusView\n        status={state.syncStatus}\n        pending={state.pendingOperations.length}\n      />\n\n      <ConflictPanel\n        conflicts={state.conflicts}\n        resolve={(conflict, value) =>\n          engine.resolveConflict(\n            conflict.recordId,\n            conflict.field as "title" | "notes" | "status",\n            value\n          )\n        }\n      />\n\n      <pre data-testid="state-json">\n        {JSON.stringify(state, null, 2)}\n      </pre>\n    </main>\n  );\n}\n'
+
+test_verifier.py:242: AssertionError
+_______________________________ test_app_testids _______________________________
+
+    def test_app_testids():
+        blob = "".join(_read(p) for p in (SRC).rglob("*.tsx"))
+        for tid in (
+            "toggle-connectivity", "sync-status", "pending-count", "state-json",
+            "record-title", "record-notes", "record-status", "save-record",
+            "record-list", "conflict-",
+        ):
+>           assert tid in blob, f"missing test id {tid}"
+E           AssertionError: missing test id record-list
+E           assert 'record-list' in 'import { useEffect, useMemo, useState } from "react";\nimport { adapter } from "./adapter/serverAdapter";\nimport { ConflictPanel } from "./components/ConflictPanel";\nimport { RecordEditor } from "./components/RecordEditor";\nimport { SyncStatusView } from "./components/SyncStatus";\nimport { SyncEngine } from "./sync/syncEngine";\n\nconst engine = new SyncEngine();\n\nexport default function App() {\n  const [, redraw] = useState(0);\n\n  useEffect(() => engine.subscribe(() => redraw((x) => x + 1)), []);\n\n  const state = engine.getState();\n  const record = useMemo(\n    () => Object.values(state.records)[0],\n    [state.records]\n  );\n\n  (window as any).__AFTERQUERY_STATE__ = () => engine.getState();\n\n  return (\n    <main style={{ maxWidth: 720, margin: "40px auto", padding: 20 }}>\n      <h1>Offline Sync</h1>\n\n      <button\n        data-testid="toggle-connectivity"\n        onClick={() => adapter.setOnline(!adapter.isOnline())}\n      >\n        Toggle connection\n      </button>\n\n      {record && (\n        <RecordEditor\n          record={record}\n          onSave={(fields) => engine.create(record.id, fields)}\n        />\n      )}\n\n      <SyncStatusView\n   ...(e) => setTitle(e.target.value)}\n          data-testid="record-title"\n        />\n      </label>\n      <label>\n        Notes\n        <textarea\n          value={notes}\n          onChange={(e) => setNotes(e.target.value)}\n          data-testid="record-notes"\n        />\n      </label>\n      <label>\n        Status\n        <select\n          value={status}\n          onChange={(e) => setStatus(e.target.value as TradeRecord["status"])}\n          data-testid="record-status"\n        >\n          <option value="draft">Draft</option>\n          <option value="active">Active</option>\n          <option value="complete">Complete</option>\n        </select>\n      </label>\n      <button\n        data-testid="save-record"\n        onClick={() => onSave({ title, notes, status })}\n      >\n        Save\n      </button>\n    </section>\n  );\n}\nimport type { SyncStatus } from "../types";\n\nexport function SyncStatusView({\n  status,\n  pending\n}: {\n  status: SyncStatus;\n  pending: number;\n}) {\n  return (\n    <section>\n      <h2>Sync</h2>\n      <div data-testid="sync-status">{status}</div>\n      <div data-testid="pending-count">{pending}</div>\n    </section>\n  );\n}\n'
+
+test_verifier.py:252: AssertionError
+=========================== short test summary info ============================
+FAILED test_verifier.py::test_artifact_dist_exists - AssertionError: missing ...
+FAILED test_verifier.py::test_artifact_bundle_references_app - FileNotFoundEr...
+FAILED test_verifier.py::test_app_persists_server_snapshot - assert 'server' ...
+FAILED test_verifier.py::test_app_create_never_clears_conflicts - AssertionEr...
+FAILED test_verifier.py::test_app_ack_idempotent_and_replays_newer - Assertio...
+FAILED test_verifier.py::test_app_stale_merges_and_keeps_pending - AssertionE...
+FAILED test_verifier.py::test_app_failure_leaves_pending - ValueError: substr...
+FAILED test_verifier.py::test_app_hooks - AssertionError: missing __AFTERQUER...
+FAILED test_verifier.py::test_app_testids - AssertionError: missing test id r...
+========================= 9 failed, 14 passed in 0.21s =========================
+reward=0

@@ -1,0 +1,105 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3.13
+cachedir: .pytest_cache
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 10 items
+
+test_verifier.py::test_oracle_selfcheck_projection_sorts PASSED          [ 10%]
+test_verifier.py::test_oracle_selfcheck_duplicate_ack PASSED             [ 20%]
+test_verifier.py::test_oracle_selfcheck_stale_ack_replay PASSED          [ 30%]
+test_verifier.py::test_oracle_selfcheck_reload_recomputes_syncing FAILED [ 40%]
+test_verifier.py::test_dist_loads_and_reports_seed_state PASSED          [ 50%]
+test_verifier.py::test_offline_edits_survive_reload_then_sync PASSED     [ 60%]
+test_verifier.py::test_duplicate_and_out_of_order_acks PASSED            [ 70%]
+test_verifier.py::test_stale_conflict_resolved_through_ui PASSED         [ 80%]
+test_verifier.py::test_failure_then_reconnect_and_reload PASSED          [ 90%]
+test_verifier.py::test_seeded_adversarial_sequence FAILED                [100%]
+
+=================================== FAILURES ===================================
+_______________ test_oracle_selfcheck_reload_recomputes_syncing ________________
+
+    def test_oracle_selfcheck_reload_recomputes_syncing():
+        s = ref.initial_model()
+        ref.local_edit(s, "r1", {"notes": "x"})
+>       assert ref.restore(ref.snapshot(s))["syncStatus"] == "syncing"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'syncStatus'
+
+test_verifier.py:161: KeyError
+_______________________ test_seeded_adversarial_sequence _______________________
+
+live = (<Page url='http://127.0.0.1:36273/'>, {'records': {'r1': {'id': 'r1', 'title': 'r4-title', 'notes': '40 tonnes', 'sta...ts': [{'recordId': 'r3', 'field': 'notes', 'localValue': 's5-notes', 'remoteValue': 'r6-notes'}], 'online': True, ...})
+
+    def test_seeded_adversarial_sequence(live):
+        page, model = live
+        rng = random.Random(20240920)
+        last_acked = None
+        reloads = 0
+        for step in range(50):
+            event = ref.choose_event(rng, model, step, last_acked)
+            kind = event[0]
+            if kind == "local":
+                _, rid, field, value = event
+>               ui_edit(page, rid, field, value)
+
+test_verifier.py:282: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_verifier.py:103: in ui_edit
+    page.select_option("[data-testid=record-status]", value)
+/usr/local/lib/python3.13/site-packages/playwright/sync_api/_generated.py:11083: in select_option
+    self._sync(
+/usr/local/lib/python3.13/site-packages/playwright/_impl/_page.py:1006: in select_option
+    return await self._main_frame.select_option(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.13/site-packages/playwright/_impl/_frame.py:678: in select_option
+    return await self._channel.send("selectOption", params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.13/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7fcf3a2d4ec0>
+cb = <function Channel.send.<locals>.<lambda> at 0x7fcf38ee4fe0>
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Page.select_option: Timeout 8000ms exceeded.
+E           Call log:
+E             - waiting for locator("[data-testid=record-status]")
+E             -     - locator resolved to <select data-testid="record-status">…</select>
+E             -   - attempting select option action
+E             -     2 × waiting for element to be visible and enabled
+E             -       - did not find some options
+E             -     - retrying select option action
+E             -     - waiting 20ms
+E             -     2 × waiting for element to be visible and enabled
+E             -       - did not find some options
+E             -     - retrying select option action
+E             -       - waiting 100ms
+E             -     16 × waiting for element to be visible and enabled
+E             -        - did not find some options
+E             -      - retrying select option action
+E             -        - waiting 500ms
+
+/usr/local/lib/python3.13/site-packages/playwright/_impl/_connection.py:528: TimeoutError
+---------------------------- Captured stderr setup -----------------------------
+127.0.0.1 - - [21/Sep/2026 00:34:00] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2026 00:34:00] "GET /assets/index-Dk5wdCcn.js HTTP/1.1" 200 -
+=========================== short test summary info ============================
+FAILED test_verifier.py::test_oracle_selfcheck_reload_recomputes_syncing - Ke...
+FAILED test_verifier.py::test_seeded_adversarial_sequence - playwright._impl....
+========================= 2 failed, 8 passed in 11.76s =========================
+reward=0

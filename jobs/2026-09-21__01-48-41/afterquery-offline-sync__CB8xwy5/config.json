@@ -1,0 +1,11 @@
+{
+    "task": {
+        "path": "."
+    },
+    "trial_name": "afterquery-offline-sync__CB8xwy5",
+    "trials_dir": "jobs/2026-09-21__01-48-41",
+    "agent": {
+        "name": "nop"
+    },
+    "job_id": "242e288b-a50a-4b37-9863-933fec7b2045"
+}

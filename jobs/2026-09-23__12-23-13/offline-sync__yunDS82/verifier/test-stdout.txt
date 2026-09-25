@@ -1,0 +1,106 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3.13
+cachedir: .pytest_cache
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 10 items
+
+test_verifier.py::test_oracle_selfcheck_projection_sorts PASSED          [ 10%]
+test_verifier.py::test_oracle_selfcheck_duplicate_ack PASSED             [ 20%]
+test_verifier.py::test_oracle_selfcheck_stale_ack_replay PASSED          [ 30%]
+test_verifier.py::test_oracle_selfcheck_reload_recomputes_syncing PASSED [ 40%]
+test_verifier.py::test_dist_loads_and_reports_seed_state PASSED          [ 50%]
+test_verifier.py::test_offline_edits_survive_reload_then_sync PASSED     [ 60%]
+test_verifier.py::test_duplicate_and_out_of_order_acks PASSED            [ 70%]
+test_verifier.py::test_stale_conflict_resolved_through_ui PASSED         [ 80%]
+test_verifier.py::test_failure_then_reconnect_and_reload PASSED          [ 90%]
+test_verifier.py::test_seeded_adversarial_sequence FAILED                [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_seeded_adversarial_sequence _______________________
+
+live = (<Page url='http://127.0.0.1:43175/'>, {'records': {'r1': {'id': 'r1', 'title': 'r4-title', 'notes': 'r27-notes', 'sta...id': 13, 'recordId': 'r3', 'fields': {'title': 's33-title'}, 'baseVersion': 7}], 'conflicts': [], 'online': True, ...})
+
+    def test_seeded_adversarial_sequence(live):
+        page, model = live
+        rng = random.Random(20240920)
+        last_acked = None
+        reloads = 0
+        for step in range(50):
+            event = ref.choose_event(rng, model, step, last_acked)
+            kind = event[0]
+            if kind == "local":
+                _, rid, field, value = event
+                ui_edit(page, rid, field, value)
+                ref.local_edit(model, rid, {field: value})
+            elif kind == "remote":
+                app_remote(page, event[1])
+                ref.remote_update(model, event[1])
+            elif kind == "ack":
+                _, op_id, rec = event
+                app_ack(page, op_id, rec)
+                ref.ack(model, op_id, rec)
+                last_acked = (op_id, rec)
+            elif kind == "dup":
+                _, op_id, rec = event
+                app_ack(page, op_id, rec)
+                ref.ack(model, op_id, rec)
+            elif kind == "stale":
+                _, op_id, rec = event
+                app_stale(page, op_id, rec)
+                ref.stale_reject(model, op_id, rec)
+            elif kind == "failure":
+                app_failure(page, event[1])
+                ref.temp_failure(model, event[1])
+            elif kind == "resolve":
+                _, rid, field, value = event
+                current = ref.canonical(model)["conflicts"]
+                match = [c for c in current
+                         if c["recordId"] == rid and c["field"] == field]
+                assert match, "resolve target vanished at step %d" % step
+                want = "local" if match[0]["localValue"] == value else "remote"
+                ui_resolve(page, rid, field, want)
+                ref.resolve_conflict(model, rid, field, value)
+            elif kind == "online":
+                app_set_online(page, event[1])
+                ref.set_online(model, event[1])
+>           check(page, model, "seeded step %d (%s)" % (step, kind))
+
+test_verifier.py:328: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+page = <Page url='http://127.0.0.1:43175/'>
+model = {'records': {'r1': {'id': 'r1', 'title': 'r4-title', 'notes': 'r27-notes', 'status': 'active', ...}, 'r2': {'id': 'r2'...'id': 13, 'recordId': 'r3', 'fields': {'title': 's33-title'}, 'baseVersion': 7}], 'conflicts': [], 'online': True, ...}
+where = 'seeded step 39 (ack)'
+
+    def check(page, model, where):
+        actual = app_state(page)
+        expected = ref.canonical(model)
+>       assert actual == expected, "%s\napp=%s\nref=%s" % (
+            where, json.dumps(actual, sort_keys=True), json.dumps(expected, sort_keys=True))
+E       AssertionError: seeded step 39 (ack)
+E         app={"conflicts": [], "pendingOperations": [{"baseVersion": 7, "fields": ["notes"], "id": 12, "recordId": "r3"}, {"baseVersion": 7, "fields": ["title"], "id": 13, "recordId": "r3"}], "records": {"r1": {"id": "r1", "notes": "r27-notes", "status": "active", "title": "r4-title", "version": 8}, "r2": {"id": "r2", "notes": "25 tonnes", "status": "complete", "title": "s7-title", "version": 4}, "r3": {"id": "r3", "notes": "s32-notes", "status": "complete", "title": "s33-title", "version": 7}, "rx9": {"id": "rx9", "notes": "r20-notes", "status": "complete", "title": "s36-title", "version": 4}}, "syncStatus": "error"}
+E         ref={"conflicts": [], "pendingOperations": [{"baseVersion": 7, "fields": ["notes"], "id": 12, "recordId": "r3"}, {"baseVersion": 7, "fields": ["title"], "id": 13, "recordId": "r3"}], "records": {"r1": {"id": "r1", "notes": "r27-notes", "status": "active", "title": "r4-title", "version": 8}, "r2": {"id": "r2", "notes": "25 tonnes", "status": "complete", "title": "s7-title", "version": 4}, "r3": {"id": "r3", "notes": "s32-notes", "status": "complete", "title": "s33-title", "version": 7}, "rx9": {"id": "rx9", "notes": "r20-notes", "status": "complete", "title": "s36-title", "version": 4}}, "syncStatus": "syncing"}
+E       assert {'records': {...onflicts': []} == {'records': {...onflicts': []}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Differing items:
+E         {'syncStatus': 'error'} != {'syncStatus': 'syncing'}
+E         
+E         Full diff:
+E           {...
+E         
+E         ...Full output truncated (54 lines hidden), use '-vv' to show
+
+test_verifier.py:138: AssertionError
+---------------------------- Captured stderr setup -----------------------------
+127.0.0.1 - - [23/Sep/2026 09:23:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Sep/2026 09:23:58] "GET /assets/index-BPPrmO0Q.js HTTP/1.1" 200 -
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [23/Sep/2026 09:23:59] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [23/Sep/2026 09:23:59] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [23/Sep/2026 09:24:00] "GET / HTTP/1.1" 304 -
+=========================== short test summary info ============================
+FAILED test_verifier.py::test_seeded_adversarial_sequence - AssertionError: s...
+========================= 1 failed, 9 passed in 5.63s ==========================
+reward=0

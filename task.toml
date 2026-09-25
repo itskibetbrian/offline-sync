@@ -1,0 +1,30 @@
+artifacts = ["/workspace/dist", "/workspace/src"]
+
+[task]
+name = "afterquery/offline-sync"
+
+[metadata]
+author_name = "Kibet Brian"
+author_email = "kibetbrian@example.com"
+difficulty_explanation = "Field-service and clinical-tools engineers build exactly this kind of offline-first mutation log, where each sync rule is simple alone but their combination across reloads defeats partial fixes. The scaffold keeps editable records behind a naive last-write-wins engine; the agent must generalize to the seeded r1/r2/r3 records, add durable server snapshots with monotonic op IDs, three-way field merges with sorted conflicts, idempotent and out-of-order ack handling with newer-op replay, failure persistence, and reload recovery. The verifier serves the built bundle in headless Chromium and steps scripted plus seeded-random event sequences through the app and an independent Python model, comparing canonical state after every event, so only a genuinely correct engine passes."
+solution_explanation = "Persist display records plus a server snapshot and monotonic op log. Local edits diff only changed fields and never clear conflicts. Remote/stale events run a three-way merge against the previous server snapshot: single-side changes merge, same-field disagreement creates sorted conflicts. Acks are idempotent and replay newer ops; failures leave ops pending with an error flag; connectivity aborts in-flight markers; reload rebuilds from storage and resends the head op."
+verification_explanation = "tests/test.sh runs pytest, which launches headless Chromium against /workspace/dist served over local HTTP. Each test drives deterministic event sequences into both the app (UI edits and resolutions via documented test ids, adapter injections for ack/stale/remote/failure/connectivity, real page reloads with readiness waits) and the independent Python reference model in tests/, then asserts deep equality of records, versions, pending projection, conflicts, and status after every step, including a 50-step seeded-random sequence the agent cannot predict. No app source is read and no identifiers are checked, so only behaviorally correct sync scores 1; a missing bundle fails every browser test, so doing nothing scores 0. Reward 1 requires all tests green, written to /logs/verifier/reward.txt with a CTRF report."
+category = "Software"
+subcategory = "Frontend"
+tags = ["frontend", "sync", "offline", "typescript"]
+expert_time_estimate_hours = 12
+relevant_experience = "Built offline-first data sync for field tools with local op logs, conflict queues, and flaky-network retry semantics."
+
+[verifier]
+timeout_sec = 1800.0
+environment_mode = "separate"
+
+[agent]
+timeout_sec = 9000.0
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 10240
+gpus = 0

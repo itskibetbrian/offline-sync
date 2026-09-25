@@ -1,0 +1,10 @@
+{
+  "results": [
+    {
+      "checks": {},
+      "cost_usd": null,
+      "task_name": "",
+      "error": "Check trial failed with AgentSetupTimeoutError: Agent setup timed out after 360.0 seconds\nTrial artifacts: jobs/2026-09-21__00-59-29/check-afterquery-offline-sync__5q96v4b"
+    }
+  ]
+}

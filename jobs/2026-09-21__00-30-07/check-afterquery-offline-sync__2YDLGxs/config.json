@@ -1,0 +1,12 @@
+{
+    "task": {
+        "path": "/tmp/harbor-check-9_k0k3ez/check-afterquery-offline-sync"
+    },
+    "trial_name": "check-afterquery-offline-sync__2YDLGxs",
+    "trials_dir": "jobs/2026-09-21__00-30-07",
+    "agent": {
+        "name": "claude-code",
+        "model_name": "anthropic/claude-opus-4-8"
+    },
+    "job_id": "f054a74f-fd5c-4c4f-9bd7-0f8aa8ef54c4"
+}

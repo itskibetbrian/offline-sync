@@ -1,0 +1,33 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3.13
+cachedir: .pytest_cache
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 23 items
+
+test_verifier.py::test_artifact_dist_exists PASSED                       [  4%]
+test_verifier.py::test_artifact_bundle_references_app PASSED             [  8%]
+test_verifier.py::test_artifact_src_present PASSED                       [ 13%]
+test_verifier.py::test_canonical_projection_sorts PASSED                 [ 17%]
+test_verifier.py::test_duplicate_ack_idempotent PASSED                   [ 21%]
+test_verifier.py::test_out_of_order_ack_replays_newer PASSED             [ 26%]
+test_verifier.py::test_stale_ack_cannot_overwrite_newer_pending PASSED   [ 30%]
+test_verifier.py::test_stale_creates_exact_sorted_conflicts PASSED       [ 34%]
+test_verifier.py::test_remote_different_fields_merge_without_conflict PASSED [ 39%]
+test_verifier.py::test_failure_leaves_pending_and_sets_error PASSED      [ 43%]
+test_verifier.py::test_status_precedence PASSED                          [ 47%]
+test_verifier.py::test_resolve_creates_new_mutation_and_clears_one PASSED [ 52%]
+test_verifier.py::test_unrelated_edit_does_not_clear_conflict PASSED     [ 56%]
+test_verifier.py::test_reload_restores_projection PASSED                 [ 60%]
+test_verifier.py::test_scenario_out_of_order_with_reload PASSED          [ 65%]
+test_verifier.py::test_app_persists_server_snapshot PASSED               [ 69%]
+test_verifier.py::test_app_create_never_clears_conflicts PASSED          [ 73%]
+test_verifier.py::test_app_ack_idempotent_and_replays_newer PASSED       [ 78%]
+test_verifier.py::test_app_stale_merges_and_keeps_pending PASSED         [ 82%]
+test_verifier.py::test_app_failure_leaves_pending PASSED                 [ 86%]
+test_verifier.py::test_app_status_precedence PASSED                      [ 91%]
+test_verifier.py::test_app_hooks PASSED                                  [ 95%]
+test_verifier.py::test_app_testids PASSED                                [100%]
+
+============================== 23 passed in 0.06s ==============================
+reward=1

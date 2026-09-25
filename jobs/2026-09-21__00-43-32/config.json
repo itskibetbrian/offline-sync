@@ -1,0 +1,13 @@
+{
+    "agents": [
+        {
+            "name": "claude-code",
+            "model_name": "anthropic/claude-opus-4-8"
+        }
+    ],
+    "tasks": [
+        {
+            "path": "/tmp/harbor-check-k60yuvmz/check-afterquery-offline-sync"
+        }
+    ]
+}

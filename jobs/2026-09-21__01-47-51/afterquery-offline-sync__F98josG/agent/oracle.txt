@@ -1,0 +1,19 @@
+
+up to date, audited 67 packages in 903ms
+
+9 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> build
+> vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 36 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  0.31 kB │ gzip:  0.23 kB
+dist/assets/index-CXH2h6bo.js  237.28 kB │ gzip: 73.96 kB
+✓ built in 1.92s
