@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3.13
+cachedir: .pytest_cache
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 13 items
+
+test_verifier.py::test_oracle_selfcheck_projection_sorts PASSED          [  7%]
+test_verifier.py::test_oracle_selfcheck_duplicate_ack PASSED             [ 15%]
+test_verifier.py::test_oracle_selfcheck_stale_ack_replay PASSED          [ 23%]
+test_verifier.py::test_oracle_selfcheck_reload_recomputes_syncing PASSED [ 30%]
+test_verifier.py::test_dist_loads_and_reports_seed_state PASSED          [ 38%]
+test_verifier.py::test_offline_edits_survive_reload_then_sync PASSED     [ 46%]
+test_verifier.py::test_duplicate_and_out_of_order_acks PASSED            [ 53%]
+test_verifier.py::test_stale_conflict_resolved_through_ui PASSED         [ 61%]
+test_verifier.py::test_failure_then_reconnect_and_reload PASSED          [ 69%]
+test_verifier.py::test_seeded_adversarial_sequence PASSED                [ 76%]
+test_verifier.py::test_delete_survives_reload_then_sync PASSED           [ 84%]
+test_verifier.py::test_delete_vs_edit_conflict_both_directions PASSED    [ 92%]
+test_verifier.py::test_out_of_order_delete_ack_replays_older_edit PASSED [100%]
+
+============================== 13 passed in 7.43s ==============================
+reward=1

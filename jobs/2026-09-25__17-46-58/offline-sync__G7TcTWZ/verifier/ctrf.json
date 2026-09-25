@@ -1,0 +1,191 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-09-25T14:47:48.627101+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 18,
+            "passed": 18,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1790347658246,
+            "stop": 1790347668626
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_verifier.py::test_oracle_selfcheck_projection_sorts",
+                "status": "passed",
+                "duration": 1,
+                "start": 1790347658511,
+                "stop": 1790347658512,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_oracle_selfcheck_duplicate_ack",
+                "status": "passed",
+                "duration": 1,
+                "start": 1790347658512,
+                "stop": 1790347658513,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_oracle_selfcheck_stale_ack_replay",
+                "status": "passed",
+                "duration": 1,
+                "start": 1790347658513,
+                "stop": 1790347658514,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_oracle_selfcheck_reload_recomputes_syncing",
+                "status": "passed",
+                "duration": 1,
+                "start": 1790347658514,
+                "stop": 1790347658515,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_dist_loads_and_reports_seed_state",
+                "status": "passed",
+                "duration": 540,
+                "start": 1790347658516,
+                "stop": 1790347659056,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_offline_edits_survive_reload_then_sync",
+                "status": "passed",
+                "duration": 638,
+                "start": 1790347659057,
+                "stop": 1790347659695,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_duplicate_and_out_of_order_acks",
+                "status": "passed",
+                "duration": 538,
+                "start": 1790347659695,
+                "stop": 1790347660233,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_stale_conflict_resolved_through_ui",
+                "status": "passed",
+                "duration": 257,
+                "start": 1790347660233,
+                "stop": 1790347660490,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_failure_then_reconnect_and_reload",
+                "status": "passed",
+                "duration": 383,
+                "start": 1790347660490,
+                "stop": 1790347660873,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_seeded_adversarial_sequence",
+                "status": "passed",
+                "duration": 5033,
+                "start": 1790347660874,
+                "stop": 1790347665907,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_delete_survives_reload_then_sync",
+                "status": "passed",
+                "duration": 229,
+                "start": 1790347665907,
+                "stop": 1790347666136,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_delete_vs_edit_conflict_both_directions",
+                "status": "passed",
+                "duration": 529,
+                "start": 1790347666136,
+                "stop": 1790347666665,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_out_of_order_delete_ack_replays_older_edit",
+                "status": "passed",
+                "duration": 322,
+                "start": 1790347666665,
+                "stop": 1790347666987,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_stale_flips_pending_delete",
+                "status": "passed",
+                "duration": 207,
+                "start": 1790347666987,
+                "stop": 1790347667194,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_stale_flips_pending_restore",
+                "status": "passed",
+                "duration": 347,
+                "start": 1790347667194,
+                "stop": 1790347667541,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_reload_with_delete_and_conflict",
+                "status": "passed",
+                "duration": 236,
+                "start": 1790347667541,
+                "stop": 1790347667777,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_field_resolve_no_op",
+                "status": "passed",
+                "duration": 254,
+                "start": 1790347667777,
+                "stop": 1790347668031,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_conflict_refresh_no_duplicates",
+                "status": "passed",
+                "duration": 594,
+                "start": 1790347668032,
+                "stop": 1790347668626,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            }
+        ]
+    }
+}

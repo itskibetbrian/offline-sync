@@ -1,0 +1,295 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-09-25T18:47:13.962860+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 27,
+            "passed": 4,
+            "failed": 23,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1790362032895,
+            "stop": 1790362033962
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_verifier.py::test_oracle_selfcheck_projection_sorts",
+                "status": "passed",
+                "duration": 1,
+                "start": 1790362033187,
+                "stop": 1790362033188,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_oracle_selfcheck_duplicate_ack",
+                "status": "passed",
+                "duration": 1,
+                "start": 1790362033188,
+                "stop": 1790362033189,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_oracle_selfcheck_stale_ack_replay",
+                "status": "passed",
+                "duration": 0,
+                "start": 1790362033190,
+                "stop": 1790362033190,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_oracle_selfcheck_reload_recomputes_syncing",
+                "status": "passed",
+                "duration": 1,
+                "start": 1790362033191,
+                "stop": 1790362033192,
+                "retries": 0,
+                "file_path": "test_verifier.py"
+            },
+            {
+                "name": "test_verifier.py::test_dist_loads_and_reports_seed_state",
+                "status": "failed",
+                "duration": 365,
+                "start": 1790362033192,
+                "stop": 1790362033557,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_offline_edits_survive_reload_then_sync",
+                "status": "failed",
+                "duration": 21,
+                "start": 1790362033557,
+                "stop": 1790362033578,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_duplicate_and_out_of_order_acks",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033578,
+                "stop": 1790362033595,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_stale_conflict_resolved_through_ui",
+                "status": "failed",
+                "duration": 16,
+                "start": 1790362033595,
+                "stop": 1790362033611,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_failure_then_reconnect_and_reload",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033611,
+                "stop": 1790362033628,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_seeded_adversarial_sequence",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033628,
+                "stop": 1790362033645,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_delete_survives_reload_then_sync",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033645,
+                "stop": 1790362033662,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_delete_vs_edit_conflict_both_directions",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033662,
+                "stop": 1790362033679,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_out_of_order_delete_ack_replays_older_edit",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033679,
+                "stop": 1790362033696,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_stale_flips_pending_delete",
+                "status": "failed",
+                "duration": 18,
+                "start": 1790362033696,
+                "stop": 1790362033714,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_stale_flips_pending_restore",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033714,
+                "stop": 1790362033731,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_reload_with_delete_and_conflict",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033731,
+                "stop": 1790362033748,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_field_resolve_no_op",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033748,
+                "stop": 1790362033765,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_conflict_refresh_no_duplicates",
+                "status": "failed",
+                "duration": 18,
+                "start": 1790362033765,
+                "stop": 1790362033783,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_create_remaps_temp_id_on_acceptance",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033783,
+                "stop": 1790362033800,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_create_delete_before_acceptance",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033801,
+                "stop": 1790362033818,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_create_offline_survives_reload",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033818,
+                "stop": 1790362033835,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_ack_acceptance_drops_delete_conflict",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033835,
+                "stop": 1790362033852,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_failure_on_create_then_ack",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033853,
+                "stop": 1790362033870,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_dup_create_ack_noop",
+                "status": "failed",
+                "duration": 19,
+                "start": 1790362033870,
+                "stop": 1790362033889,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_create_chain_reverse_drain",
+                "status": "failed",
+                "duration": 18,
+                "start": 1790362033889,
+                "stop": 1790362033907,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_offline_create_delete_reload",
+                "status": "failed",
+                "duration": 17,
+                "start": 1790362033907,
+                "stop": 1790362033924,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            },
+            {
+                "name": "test_verifier.py::test_remap_then_remote_delete_restore",
+                "status": "failed",
+                "duration": 38,
+                "start": 1790362033924,
+                "stop": 1790362033962,
+                "retries": 0,
+                "file_path": "test_verifier.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def base_url():\n        if not (DIST / \"index.html\").is_file():\n>           pytest.fail(\"missing /workspace/dist/index.html; run npm run build in /workspace\")\nE           Failed: missing /workspace/dist/index.html; run npm run build in /workspace\n\ntest_verifier.py:38: Failed"
+            }
+        ]
+    }
+}

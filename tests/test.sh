@@ -4,9 +4,14 @@ mkdir -p /logs/verifier
 cd /tests
 set +e
 CTRF_FLAG=""
-if pytest --help 2>/dev/null | grep -q -- '--ctrf'; then
+# NOTE: never pipe `pytest --help` into `grep -q` here. Under `pipefail`,
+# grep -q closes the pipe at the first match, pytest dies with SIGPIPE, the
+# detection fails, and the run falls back to the synthetic one-entry report.
+# Capture to a file first, then grep the file.
+if pytest --help >/tmp/pytest_help.txt 2>&1 && grep -q -- '--ctrf' /tmp/pytest_help.txt; then
   CTRF_FLAG="--ctrf=/logs/verifier/ctrf.json"
 fi
+rm -f /tmp/pytest_help.txt
 if [ -n "$CTRF_FLAG" ]; then
   pytest -v "$CTRF_FLAG"
 else
